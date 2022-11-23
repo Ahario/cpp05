@@ -36,7 +36,7 @@ void Form::signForm()
 	try
 	{
 		if (this->sign == true)
-			std::cout << this->name << " signed" << 
+			std::cout << this->name << " signed " << 
 	}
 	catch(bool expn)
 	{
