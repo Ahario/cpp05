@@ -6,55 +6,56 @@ Form::Form(int minimum)
 	this->minimum = minimum;
 }
 
-void Form::beSigned(Bureaucrat b)
+std::string	Form::getName( void ) const
 {
-	try
-	{
-		if (b.getGrade() >= 1 && b.getGrade() <= 150 && b.getGrade() >= this->minimum)
-		{
-			this->grade = b.getGrade();
-			this->name = b.getName();
-			this->sign = true;
-		}
-		else
-		{
-			this->sign = false;
-			throw false;
-		}
-	}
-	catch(bool expn)
-	{
-		if (b.getGrade() >= 151 || b.getGrade() >= this->minimum)
-			GradeTooLowException();
-		else
-			GradeTooHighException();
-	}
+	return (this->name);
 }
 
-void Form::signForm()
+int					Form::getMinimum( void ) const
 {
-	try
-	{
-		if (this->sign == true)
-			std::cout << this->name << " signed " << 
-	}
-	catch(bool expn)
-	{
-		
-	}
-	
+	return (this->minimum);
 }
 
-void Form::GradeTooHighException()
+bool				Form::getSign( void ) const
 {
-	std::cout << "Warning: Your Grade is Too High" << std::endl;
-}
-void Form::GradeTooLowException()
-{
-	std::cout << "Warning: Your Grade is Too Low" << std::endl;
+	return (this->sign);
 }
 
-std::ostream& operator<<(std::ostream& ofile, Bureaucrat bureau)
+void Form::beSigned(Bureaucrat& a)
 {
-	
+	if (a.getGrade() > this->minimum)
+	{
+		throw (Form::GradeTooLowException());
+		return ;
+	}	
+	this->sign = true;
+}
+
+const char* Form::GradeTooHighException()
+{
+	return ("Warning: Your Grade is Too High");
+}
+const char* Form::GradeTooLowException()
+{
+	return ("Warning: Your Grade is Too Low");
+}
+
+const char* Form::GradeTooHighException::what() const throw()
+{
+	return ("Warning: Your Grade is Too High");
+}
+const char* Form::GradeTooLowException::what() const throw()
+{
+	return ("Warning: Your Grade is Too Low");
+}
+
+const char* Form::Exception::what() const throw()
+{
+	return ("Exception from Form");
+}
+
+std::ostream& operator<<(std::ostream& ofile, Form const& f)
+{
+	ofile << "In order to get " << f.getName() << " signed, you need " << f.getMinimum() << " and currently your state is " << f.getSign() << std::endl;
+	return (ofile);
 }

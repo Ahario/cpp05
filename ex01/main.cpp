@@ -18,4 +18,5 @@ int main()
 	e.incrementGrade();
 	std::cout << e << std::endl;
 	std::cout << a << std::endl;
+	std::cout << d << std::endl;
 }

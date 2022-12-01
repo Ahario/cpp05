@@ -74,3 +74,15 @@ std::ostream& operator<<(std::ostream& ofile, Bureaucrat Bureau)
 	return (ofile);
 }
 
+void Bureaucrat::signForm(Form & ref)
+{
+	try
+	{
+		ref.beSigned(*this);
+		std::cout << "Bureaucrat " << this->name << " with a grade " << this->grade << " signs " << ref << std::endl;
+	}
+	catch (Form::Exception &e)
+	{
+		std::cout << "Bureaucrat " << this->name << " with a grade " << this->grade << " cannot sign " << ref << " because " << e.what() << std::endl;
+	}
+}

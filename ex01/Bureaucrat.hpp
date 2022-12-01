@@ -4,6 +4,10 @@
 #include <iostream>
 #include <string.h>
 
+#include "Form.hpp"
+
+class Form;
+
 class Bureaucrat {
 	public:
 		Bureaucrat(std::string name, int grade);
@@ -14,10 +18,11 @@ class Bureaucrat {
 		int getGrade(void);
 		void decrementGrade();
 		void incrementGrade();
+		void signForm(Form & ref);
 	private:
 		std::string name;
 		int grade;
 };
-std::ostream& operator<<(std::ostream& ofile, Bureaucrat bureau);
+std::ostream& operator<<(std::ostream& ofile, Bureaucrat const & bureau);
 
 #endif
